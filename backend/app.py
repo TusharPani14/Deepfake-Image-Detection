@@ -6,10 +6,13 @@ from pathlib import Path
 
 app = FastAPI()
 
-# Allow CORS for local frontend development
+# Allow CORS for local frontend development and Vercel deployment
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://deepfake-image-detection.vercel.app"  # Vercel deployment
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
