@@ -15,7 +15,7 @@ const ImageUploader = ({ onResult }) => {
     formData.append('file', selectedFile);
     // https://deepfake-image-detection-backend.onrender.com
     try {
-      const response = await fetch('http://localhost:3000/predict', {
+      const response = await fetch('http://localhost:8000/predict', {
         method: 'POST',
         body: formData,
       });
