@@ -3,8 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from utils.predict import predict_image
 import uvicorn
 from pathlib import Path
+from flask_cors import CORS, cross_origin
 
 app = FastAPI()
+CORS(app, support_credentials=True)
 
 # Allow CORS for local frontend development and Vercel deployment
 app.add_middleware(
@@ -17,11 +19,13 @@ app.add_middleware(
 
 # Define the route for health check
 @app.get("/")
+@cross_origin(supports_credentials=True)
 def read_root():
     return {"message": "Deepfake Detection API is running"}
 
 # Endpoint to upload an image and get prediction
 @app.post("/predict")
+@cross_origin(supports_credentials=True)
 async def predict(file: UploadFile = File(...)):
     # Save the uploaded file temporarily
     temp_file_path = Path("uploaded_image.jpg")
